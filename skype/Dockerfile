@@ -19,6 +19,10 @@ RUN apt-get install apt-transport-https -y
 RUN apt-get install curl -y
 RUN curl -o /skype.deb https://repo.skype.com/latest/skypeforlinux-64.deb
 
-RUN dpkg -i /skype.deb \
-    && rm /skype.deb
-CMD ["skypeforlinux"]
+RUN dpkg -i /skype.deb
+RUN rm /skype.deb
+
+COPY ./exec /bin
+RUN chmod +x /bin/exec
+CMD ["bin/exec"]
+# CMD ["bash"]
